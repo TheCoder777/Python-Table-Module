@@ -14,8 +14,37 @@ class Table(object):
         self.root = [[self.content for col in range(self.cols) ]for row in range(self.rows)]
         # self.root = [[[[0,0]], [[0,0]]], [[[0,0]], [[0,0]]]] #example
 
+    def get(self, col=None, row=None): #needs an integer, or no value at all 
+        try:
+            # if col > self.cols or row > self.rows:
+                # print("Given col or row out of range/index!")
+                # return self.root #returns the complete table if index got out of range!
+            if not col and not row:
+                return self.root
+            elif row and not col:
+                if int(row) > self.rows:
+                    print("Value of given row is out of range/index!")
+                    return self.root #returns the complete table if index got out of range!
+                else:
+                    return self.root[row]
+            elif col and not row:
+                if int(col) > self.cols:
+                    print("Value of given row is out of range/index!")
+                    return self.root #returns the complete table if index got out of range!
+                else:
+                    return [i[col] for i in self.root]
+            else: #now col and row are given!
+                if int(col) > self.cols and int(row) > self.rows:
+                    print("Value of given row and col are out of range/index!")
+                    return self.root #returns the complete table if index got out of range!
+                else:
+                    return self.root[col][row]
+        except:
+            print("Given col or row isn't a number!")
+            return self.root #returns the complete table if an error raises!
+
 if __name__ == "__main__":
-    pass 
+    pass
 
 
 
