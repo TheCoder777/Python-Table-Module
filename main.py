@@ -14,4 +14,7 @@ class Table(object):
         self.root = [[self.content for col in range(self.cols) ]for row in range(self.rows)]
         # self.root = [[[[0,0]], [[0,0]]], [[[0,0]], [[0,0]]]] #example
 
+if __name__ == "__main__":
+    pass 
+
 
