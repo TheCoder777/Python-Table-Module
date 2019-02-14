@@ -73,6 +73,34 @@ class Table(object):
         else: #body is now False, or anything we don't care about
             pass #body is False, so nothing here will be printed
 
+    def sum(self, items=False, iscol=False, isrow=False):
+        values = list()
+        if items:
+            if type(items) is list or tuple:
+                for item in items: # iterate over given positions: '(col, row)'
+                    if type(item) is int:
+                        if iscol:
+                            for val in self.root[item]:
+                                values.append(val)
+                        elif isrow:
+                            for val in self.root[0][item]:
+                                values.append(val)
+                        else:
+                            print("Option iscol or isrow not specified!")
+                            return None #returns nothing
+                    elif type(item) is tuple: #for example '(1, 2)'
+                        values.append(self.root[item[0]][item[1]])
+                    else:
+                        print("Could't find any matching operator!")
+                        return None
+                print(values)
+                return sum(values)
+            # elif type(items) is tuple:
+                
+        else:
+            print(type(items))
+
+
 if __name__ == "__main__":
     pass
 
