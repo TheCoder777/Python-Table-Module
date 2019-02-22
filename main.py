@@ -126,7 +126,7 @@ class Table(object):
         else:
             print(type(items))
 
-    def __det_2x2(self, matrix): 
+    def __det_2x2(self, matrix):
         return (matrix[0][0] * matrix[1][1]) - (matrix[0][1] * matrix[1][0])
 
     def __det_3x3(self,matrix, straight=False):
@@ -150,7 +150,7 @@ class Table(object):
         fourth_sector = [matrix[0][1:], matrix[1][1:], matrix[2][1:]] # bcd; fgh; klm
         return (matrix[0][0] * self.__det_3x3(first_sector)) - (matrix[1][0] * self.__det_3x3(second_sector)) + (matrix[2][0] * self.__det_3x3(third_sector)) - (matrix[0][3] * self.__det_3x3(fourth_sector))
 
-    def det(self, straight=False): # add 'straight' mode later (calculate 3x3 directly, not using 2x3)
+    def det(self, straight=False): # add 'straight' mode later (calculate 3x3 directly, not using 2x2)
         if self.cols == self.rows:
             if self.cols and self.rows == 2:
                 return self.__det_2x2(self.root)
