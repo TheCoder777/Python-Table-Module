@@ -126,22 +126,44 @@ class Table(object):
         else:
             print(type(items))
 
-    def __det_2x2(matrix): 
+    def __det_2x2(self, matrix): 
         return (matrix[0][0] * matrix[1][1]) - (matrix[0][1] * matrix[1][0])
 
-    def det() # add 'straight' mode later (calculate 3x3 directly, not using 2x3):
+    def __det_3x3(self,matrix, straight=False):
+        if straight:
+            pass # calculate matrix directly
+        else:
+            first_sector = [[matrix[0][1], matrix[0][2]], [matrix[1][1], matrix[1][2]]]
+            second_sector = [[matrix[0][1], matrix[0][2]], [matrix[2][1], matrix[2][2]]]
+            third_sector = [[matrix[1][1], matrix[1][2]], [matrix[2][1], matrix[2][2]]]
+            return (matrix[0][0] * self.__det_2x2(first_sector)) - (matrix[1][0] * self.__det_2x2(second_sector)) + (matrix[2][0] * self.__det_2x2(third_sector))
+
+    def __det_4x4(self, matrix, straight=False):
+        # exaple 4x4:
+        # a, b, c, d,
+        # e, f, g, h,
+        # i, k, l, m,
+        # n, o, p, q
+        first_sector = [matrix[1][1:], matrix[2][1:], matrix[3][1:]] # fgh; klm; opq
+        second_sector = [matrix[0][1:], matrix[1][1:], matrix[3][1:]] # bcd; klm; opq
+        third_sector = [matrix[0][1:], matrix[2][1:], matrix[3][1:]] # bcd; fgh; opq
+        fourth_sector = [matrix[0][1:], matrix[1][1:], matrix[2][1:]] # bcd; fgh; klm
+        return (matrix[0][0] * self.__det_3x3(first_sector)) - (matrix[1][0] * self.__det_3x3(second_sector)) + (matrix[2][0] * self.__det_3x3(third_sector)) - (matrix[0][3] * self.__det_3x3(fourth_sector))
+
+    def det(self, straight=False): # add 'straight' mode later (calculate 3x3 directly, not using 2x3)
         if self.cols == self.rows:
             if self.cols and self.rows == 2:
-                return (matrix[0][0] * matrix[1][1]) - (matrix[0][1] * matrix[1][0])
+                return self.__det_2x2(self.root)
             elif self.cols and self.rows == 3:
-                first_sector = [[matrix[0][1], matrix[0][2]], [matrix[1][1], matrix[1][2]]]
-                second_sector = [[matrix[0][1], matrix[0][2]], [matrix[2][1], matrix[2][2]]]
-                third_sector = [[matrix[1][1], matrix[1][2]], [matrix[2][1], matrix[2][2]]]
-                return (matrix[0][0] * calc_2x2(first_sector)) - (matrix[1][0] * calc_2x2(second_sector)) + (matrix[2][0] * calc_2x2(third_sector))
+                if straight:
+                    pass
+                else:
+                    return self.__det_3x3(self.root)
+            elif self.cols and self.rows == 4:
+                return self.__det_4x4(self.root)
             else:
-                print("Couldn't calulate determinat, matrix is too big!)
-
-
+                print("matrix is to big to calculate!")
+                return None
 
 if __name__ == "__main__":
     pass
