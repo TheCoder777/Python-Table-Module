@@ -121,9 +121,26 @@ class Table(object):
                 print(values)
                 return sum(values)
             # elif type(items) is tuple:
-                
+            else:
+                pass
         else:
             print(type(items))
+
+    def __det_2x2(matrix): 
+        return (matrix[0][0] * matrix[1][1]) - (matrix[0][1] * matrix[1][0])
+
+    def det() # add 'straight' mode later (calculate 3x3 directly, not using 2x3):
+        if self.cols == self.rows:
+            if self.cols and self.rows == 2:
+                return (matrix[0][0] * matrix[1][1]) - (matrix[0][1] * matrix[1][0])
+            elif self.cols and self.rows == 3:
+                first_sector = [[matrix[0][1], matrix[0][2]], [matrix[1][1], matrix[1][2]]]
+                second_sector = [[matrix[0][1], matrix[0][2]], [matrix[2][1], matrix[2][2]]]
+                third_sector = [[matrix[1][1], matrix[1][2]], [matrix[2][1], matrix[2][2]]]
+                return (matrix[0][0] * calc_2x2(first_sector)) - (matrix[1][0] * calc_2x2(second_sector)) + (matrix[2][0] * calc_2x2(third_sector))
+            else:
+                print("Couldn't calulate determinat, matrix is too big!)
+
 
 
 if __name__ == "__main__":
