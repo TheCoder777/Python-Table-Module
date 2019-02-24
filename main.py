@@ -98,7 +98,7 @@ class Table(object):
         else: #body is now False, or anything we don't care about
             pass #body is False, so nothing here will be printed
 
-    def sum(self, items=False, iscol=False, isrow=False):
+    def sum(self, items=False, cols=False, rows=False):
         values = list()
         if items is not False:
             if isinstance(items, (list, tuple)) is list or tuple: # works with both types
