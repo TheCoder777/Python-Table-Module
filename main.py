@@ -100,21 +100,37 @@ class Table(object):
 
     def sum(self, items=False, iscol=False, isrow=False):
         values = list()
-        if items:
-            if type(items) is list or tuple:
-                for item in items: # iterate over given positions: '(col, row)'
-                    if type(item) is int:
-                        if iscol:
-                            for val in self.root[item]:
-                                values.append(val)
-                        elif isrow:
-                            for val in self.root[0][item]:
-                                values.append(val)
-                        else:
-                            print("Option iscol or isrow not specified!")
-                            return None #returns nothing
-                    elif type(item) is tuple: #for example '(1, 2)'
+        if items is not False:
+            if isinstance(items, (list, tuple)) is list or tuple: # works with both types
+                if isinstance(items[0], int) and isinstance(items[1], int): # this line is out of for loop, cause when it's in there, it would append the value two times! (cause it iterates two times over the [x,y] positions)
+                    values.append(self.root[items[1]][items[0]]) # if given items only contains one position
+                else:
+                    for item in items: # iterate over given positions: '(col, row)'
                         values.append(self.root[item[0]][item[1]])
+            else:
+                print("given positions are not list neither tuple!")
+                return 1 # error code system?
+
+        if cols is not False:
+            if isinstance(cols, (list, tuple)):
+                for col in cols:
+                    for i in self.root:
+                        values.append(i[col])
+            elif isinstance(cols, int):
+                for i in self.root:
+                    values.append(i[cols])
+            else:
+                print("Unvalid value for 'cols'!")
+
+        if rows is not False:
+            if isinstance(rows, (list, tuple)):
+                for row in rows:
+                    values.append(self.root[row])
+            elif isinstance(rows, int):
+                for i in self.root[rows]:
+                    values.append(i)
+            else:
+                print("unvalid value for 'rows'!\nMust be 'lists', 'tuple' or 'int'!\nBut given value is: {}".format(type(rows)))
                     else:
                         print("Could't find any matching operator!")
                         return None
@@ -125,6 +141,11 @@ class Table(object):
                 pass
         else:
             print(type(items))
+
+        try:
+            return sum(values)
+        except:
+            print("could not calulate sum!")
 
     def __det_2x2(self, matrix):
         return (matrix[0][0] * matrix[1][1]) - (matrix[0][1] * matrix[1][0])
