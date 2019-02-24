@@ -131,14 +131,6 @@ class Table(object):
                     values.append(i)
             else:
                 print("unvalid value for 'rows'!\nMust be 'lists', 'tuple' or 'int'!\nBut given value is: {}".format(type(rows)))
-                    else:
-                        print("Could't find any matching operator!")
-                        return None
-                print(values)
-                return sum(values)
-            # elif type(items) is tuple:
-            else:
-                pass
         else:
             print(type(items))
 
