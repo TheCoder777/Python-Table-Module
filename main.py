@@ -99,10 +99,7 @@ class Table(object):
             pass #body is False, so nothing here will be printed
 
     def sum(self, items=False, cols=False, rows=False):
-        # self.items = items
         values = list()
-        # print(items)
-        # print(type(items))
         if items is not False:
             if isinstance(items, (list, tuple)) is list or tuple: # works with both types
                 if isinstance(items[0], int) and isinstance(items[1], int): # this line is out of for loop, cause when it's in there, it would append the value two times! (cause it iterates two times over the [x,y] positions)
