@@ -38,9 +38,9 @@ class Table(object):
         self.build()
 
     def __str__(self):
-        return str(self.show())
+        return str(self.show(get=True))
     def __repr__(self):
-        return str(self.show())
+        return str(self.show(get=True))
     def build(self): #'self.root' is the main table!
         self.root = [[self.content for col in range(self.cols) ]for row in range(self.rows)]
         # self.root = [[[[0,0]], [[0,0]]], [[[0,0]], [[0,0]]]] #example
@@ -73,8 +73,27 @@ class Table(object):
         except:
             print("Given col or row isn't a number!")
             return self.root #returns the complete table if an error raises!
+    def __convert_to_str(self):
+        root_str = str()
+        for row in self.root:
+            root_str = root_str + "\n" + str(row)
+        return root_str
 
-    def show(self, head=True, body=True, root_id=True, brackets=True):
+    def show(self, head=True, body=True, root_id=True, brackets=True, get=False):
+        if get:
+            # repr_str = ""
+
+#             if head:
+                # repr_str += "\n{}".format(self.head)
+                # if root_id:
+                    # rpr_str += "\n\t\t{}".format(self.root_id)
+                # else:
+                    # pass
+            # else:
+                # pass
+            return str(self.head) + "\nID:\t\t{}\n".format(self.root_id) + str(self.__convert_to_str()) 
+        else:
+            pass
         if head and root_id:
             print("\n{}\nID:\t\t{}".format(self.head, self.root_id))
         elif head and not root_id:
