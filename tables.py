@@ -38,9 +38,9 @@ class Table(object):
         self.build()
 
     def __str__(self):
-        return self.show()
+        return str(self.show())
     def __repr__(self):
-        return self.show()
+        return str(self.show())
     def build(self): #'self.root' is the main table!
         self.root = [[self.content for col in range(self.cols) ]for row in range(self.rows)]
         # self.root = [[[[0,0]], [[0,0]]], [[[0,0]], [[0,0]]]] #example
