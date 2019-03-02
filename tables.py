@@ -37,6 +37,10 @@ class Table(object):
         self.head = "Name:\t\t" + str(name) + "\nDimensions:\t" + str(self.cols) + "x" + str(self.rows) #define head variable
         self.build()
 
+    def __str__():
+        return self.show()
+    def __repr__():
+        return self.show()
     def build(self): #'self.root' is the main table!
         self.root = [[self.content for col in range(self.cols) ]for row in range(self.rows)]
         # self.root = [[[[0,0]], [[0,0]]], [[[0,0]], [[0,0]]]] #example
