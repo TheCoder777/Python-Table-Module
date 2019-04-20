@@ -172,7 +172,7 @@ class Table(object):
             first_sector = [[matrix[0][1], matrix[0][2]], [matrix[1][1], matrix[1][2]]]
             second_sector = [[matrix[0][1], matrix[0][2]], [matrix[2][1], matrix[2][2]]]
             third_sector = [[matrix[1][1], matrix[1][2]], [matrix[2][1], matrix[2][2]]]
-            return (matrix[0][0] * self.__det_2x2(first_sector)) - (matrix[1][0] * self.__det_2x2(second_sector)) + (matrix[2][0] * self.__det_2x2(third_sector))
+            return (matrix[0][0] * self.__det_2x2(third_sector)) - (matrix[1][0] * self.__det_2x2(second_sector)) + (matrix[2][0] * self.__det_2x2(first_sector))
 
     def __det_4x4(self, matrix, straight=False):
         # exaple 4x4:
